@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Strategy — Card-Linked Commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f5f0;
+    --paper-2:#efece4;
+    --ink:#1c1c1a;
+    --ink-soft:#3c3b37;
+    --muted:#6b6862;
+    --line:#d8d3c8;
+    --teal:#1f4b46;
+    --teal-soft:#2d6159;
+    --amber:#b3791f;
+    --amber-soft:#caa15a;
+    --rule:#c9c3b6;
+    --shadow:0 1px 2px rgba(28,28,26,.04),0 8px 28px rgba(28,28,26,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+
+  /* ---- masthead ---- */
+  header.mast{
+    padding:54px 0 30px;
+    border-bottom:1.5px solid var(--ink);
+    margin-bottom:8px;
+  }
+  .kicker{
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--amber);font-weight:600;margin-bottom:20px;
+  }
+  h1{
+    font-family:'Newsreader',Georgia,serif;
+    font-weight:500;
+    font-size:clamp(30px,7vw,46px);
+    line-height:1.08;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    margin-bottom:18px;
+  }
+  .standfirst{
+    font-family:'Newsreader',serif;
+    font-size:clamp(17px,4.4vw,20px);
+    line-height:1.5;
+    color:var(--ink-soft);
+    font-weight:400;
+    max-width:42em;
+  }
+  .standfirst em{color:var(--teal);font-style:italic}
+
+  /* ---- section scaffolding ---- */
+  section{padding:40px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  .sec-num{
+    font-family:'Newsreader',serif;
+    font-size:13px;font-weight:600;color:var(--amber);
+    letter-spacing:.04em;margin-bottom:10px;display:block;
+  }
+  h2{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:clamp(23px,5.6vw,30px);
+    line-height:1.15;
+    letter-spacing:-.01em;
+    margin-bottom:16px;
+    color:var(--ink);
+  }
+  h3{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:.01em;
+    margin:26px 0 8px;
+    color:var(--teal);
+  }
+  p{margin-bottom:15px;color:var(--ink-soft)}
+  p.lead{font-size:18px;color:var(--ink)}
+  strong{color:var(--ink);font-weight:600}
+  a{color:var(--teal-soft)}
+
+  /* ---- data points ---- */
+  .stat-row{
+    display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 8px;
+  }
+  .stat{
+    flex:1 1 150px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:16px 16px 14px;
+  }
+  .stat .fig{
+    font-family:'Newsreader',serif;
+    font-size:27px;font-weight:600;color:var(--teal);
+    line-height:1;margin-bottom:6px;letter-spacing:-.01em;
+  }
+  .stat .lbl{font-size:13px;color:var(--muted);line-height:1.4}
+
+  /* ---- callout ---- */
+  .insight{
+    border-left:3px solid var(--amber);
+    background:linear-gradient(90deg,rgba(179,121,31,.06),rgba(179,121,31,0));
+    padding:16px 20px;margin:24px 0;border-radius:0 3px 3px 0;
+  }
+  .insight p{margin:0;color:var(--ink);font-size:16.5px}
+  .insight .tag{
+    display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--amber);font-weight:600;margin-bottom:6px;
+  }
+
+  /* ---- P&L table ---- */
+  .pnl-wrap{margin:20px 0 6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table.pnl{
+    width:100%;border-collapse:collapse;font-size:14.5px;min-width:420px;
+  }
+  table.pnl caption{
+    text-align:left;font-weight:600;font-size:15px;color:var(--ink);
+    margin-bottom:10px;font-family:'Inter';
+  }
+  table.pnl th,table.pnl td{
+    text-align:right;padding:10px 12px;border-bottom:1px solid var(--line);
+  }
+  table.pnl th:first-child,table.pnl td:first-child{text-align:left}
+  table.pnl thead th{
+    font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;border-bottom:1.5px solid var(--ink);
+  }
+  table.pnl .grp{
+    background:var(--paper-2);font-weight:600;color:var(--ink);
+  }
+  table.pnl .net td{
+    border-top:1.5px solid var(--ink);border-bottom:none;
+    font-weight:600;color:var(--ink);font-family:'Newsreader',serif;font-size:16px;
+  }
+  table.pnl .net td.pos{color:var(--teal)}
+  table.pnl .net td.neg{color:#9a3320}
+  .placeholder{color:var(--amber);font-weight:600}
+  .tbl-note{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.45}
+
+  /* ---- filter chips ---- */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+  .filter{
+    flex:1 1 200px;border:1px solid var(--line);border-radius:3px;
+    padding:14px 16px;background:var(--paper-2);
+  }
+  .filter .n{
+    font-family:'Newsreader',serif;font-size:13px;color:var(--amber);
+    font-weight:600;margin-bottom:4px;
+  }
+  .filter .t{font-weight:600;font-size:14.5px;color:var(--ink);margin-bottom:3px}
+  .filter .d{font-size:13px;color:var(--muted);line-height:1.45}
+
+  /* ---- product lists ---- */
+  .cat{margin:22px 0}
+  .cat-head{
+    display:flex;align-items:baseline;gap:10px;
+    border-bottom:1.5px solid var(--ink);padding-bottom:7px;margin-bottom:4px;
+  }
+  .cat-head .name{font-weight:600;font-size:16px;color:var(--ink)}
+  .cat-head .tier{font-size:12.5px;color:var(--amber);font-weight:600;margin-left:auto}
+  ul.prod{list-style:none}
+  ul.prod li{
+    padding:11px 0;border-bottom:1px solid var(--line);
+    font-size:15px;line-height:1.5;
+  }
+  ul.prod li:last-child{border-bottom:none}
+  ul.prod li .pname{font-weight:600;color:var(--ink)}
+  ul.prod li .why{color:var(--muted);font-size:13.5px;display:block;margin-top:2px}
+
+  /* ---- funnel ---- */
+  .funnel{margin:20px 0 18px;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .fstage{
+    display:grid;grid-template-columns:104px 1fr;gap:0;
+    border-bottom:1px solid var(--line);background:#fbfaf6;
+  }
+  .fstage:last-child{border-bottom:none}
+  .fstage .fs-stage{
+    background:var(--teal);color:var(--paper);
+    font-family:'Newsreader',serif;font-weight:600;font-size:14px;
+    padding:13px 14px;display:flex;align-items:center;
+  }
+  .fstage .fs-goal{
+    padding:10px 14px 2px;font-weight:600;font-size:14px;color:var(--ink);
+  }
+  .fstage .fs-med{
+    grid-column:2;padding:0 14px 11px;font-size:12.5px;color:var(--muted);line-height:1.4;
+  }
+
+  /* ---- channel cards ---- */
+  .chan{
+    border:1px solid var(--line);border-radius:4px;padding:18px 20px;
+    margin:14px 0;background:#fbfaf6;box-shadow:var(--shadow);
+  }
+  .chan .top{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+  .chan .rank{
+    font-family:'Newsreader',serif;font-size:22px;font-weight:600;
+    color:var(--teal);line-height:1;
+  }
+  .chan .ttl{font-weight:600;font-size:16px;color:var(--ink)}
+  .chan .role{
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);font-weight:600;margin-left:auto;white-space:nowrap;
+  }
+  .chan p{margin:0;font-size:14.5px;color:var(--ink-soft)}
+
+  /* ---- asks ---- */
+  ol.asks{counter-reset:a;list-style:none;margin-top:10px}
+  ol.asks li{
+    position:relative;padding:14px 0 14px 44px;border-bottom:1px solid var(--line);
+    font-size:15.5px;color:var(--ink-soft);
+  }
+  ol.asks li:last-child{border-bottom:none}
+  ol.asks li::before{
+    counter-increment:a;content:counter(a);
+    position:absolute;left:0;top:13px;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--teal);color:var(--paper);
+    font-family:'Newsreader',serif;font-weight:600;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  ol.asks li strong{display:block;margin-bottom:2px}
+
+  /* ---- forward note ---- */
+  .forward{
+    margin-top:30px;padding:20px 22px;border:1px dashed var(--amber-soft);
+    border-radius:4px;background:rgba(179,121,31,.04);
+  }
+  .forward .tag{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--amber);font-weight:600;margin-bottom:7px;display:block;
+  }
+  .forward p{margin:0;font-size:15px;color:var(--ink-soft)}
+
+  /* ---- footer ---- */
+  footer{padding:40px 0 60px;text-align:left}
+  footer .sources{font-size:12px;color:var(--muted);line-height:1.7}
+  footer .sources h4{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:600;margin-bottom:10px;
+  }
+  footer .sign{
+    margin-top:30px;padding-top:20px;border-top:1px solid var(--line);
+    font-family:'Newsreader',serif;font-style:italic;font-size:16px;color:var(--teal);
+  }
+  sup{font-size:11px;color:var(--amber);font-weight:600;padding-left:1px}
+
+  /* ---- reveal ---- */
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+  @media(max-width:480px){
+    body{font-size:16px}
+    .wrap{padding:0 18px}
+    header.mast{padding:40px 0 26px}
+    section{padding:32px 0}
+    .stat .fig{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="kicker rv">Digital Strategy — Working Note</div>
+    <h1 class="rv">Turning card-linked discounts<br>into a margin-led business.</h1>
+    <p class="standfirst rv">A considered approach to the digital build — one that works backwards from the unit economics, so that effort and spend are directed where they earn a return. <em>A first cut, for discussion.</em></p>
+  </header>
+
+  <!-- 1 -->
+  <section>
+    <span class="sec-num rv">01 — The prize</span>
+    <h2 class="rv">The opportunity is real, and the timing is right.</h2>
+    <p class="lead rv">The focus on relatively high-value purchases financed on no-cost EMI is well-placed. The demand is large, it is growing, and — importantly — much of it is <strong>latent</strong>: buyers tend to discover EMI at checkout rather than setting out to find it. That gap between intent and discovery is what a well-built front end is positioned to capture.</p>
+    <div class="stat-row rv">
+      <div class="stat"><div class="fig">~$70B</div><div class="lbl">India e-commerce, FY25 — tripling toward $174–214B by FY30<sup>1</sup></div></div>
+      <div class="stat"><div class="fig">~40%</div><div class="lbl">of card-based retail transactions run through EMI (RBI data)<sup>2</sup></div></div>
+      <div class="stat"><div class="fig">~40%</div><div class="lbl">of consumer-electronics sales in India are now online<sup>3</sup></div></div>
+    </div>
+    <div class="insight rv">
+      <span class="tag">The read</span>
+      <p>The shift toward premium, financed purchases is documented rather than assumed: consumers are trading up to higher-value products, with accessible EMI making the upgrade feel affordable.<sup>4</sup> The thesis sits with a genuine market trend.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <span class="sec-num rv">02 — The economics that must shape the strategy</span>
+    <h2 class="rv">"High value" is not the filter. High value <em>×</em> the right category <em>×</em> EMI availability is.</h2>
+    <p class="rv">Before any campaign is designed, one variable governs the model: <strong>the earning per completed sale.</strong> It varies considerably by category — and, perhaps counter-intuitively, the most premium-looking category (electronics) tends to be the weakest payer.</p>
+
+    <h3 class="rv">Two revenue mechanisms — modelled side by side</h3>
+    <p class="rv">Pending confirmation of the commercial arrangement, both are modelled here: the <strong>public affiliate rate</strong> (what the platform pays a referrer, subject to category caps), and a <strong>negotiated rate</strong> (an empanelled commercial — a figure to be inserted). The framework holds under either.</p>
+
+    <!-- P&L A -->
+    <div class="pnl-wrap rv">
+      <table class="pnl">
+        <caption>Worked example A — ₹50,000 large appliance / home (commission-friendly category)</caption>
+        <thead>
+          <tr><th>Line</th><th>Affiliate (public)</th><th>Negotiated</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sale value</td><td>₹50,000</td><td>₹50,000</td></tr>
+          <tr><td>Commission rate</td><td>~7–8%<sup>5</sup></td><td class="placeholder">[ rate ]</td></tr>
+          <tr class="grp"><td>Gross revenue / sale</td><td>~₹3,750</td><td class="placeholder">[ fill ]</td></tr>
+          <tr><td>Less: acquisition cost*</td><td>~₹800–1,500</td><td>~₹800–1,500</td></tr>
+          <tr class="net"><td>Net margin / sale</td><td class="pos">~₹2,250–2,950</td><td class="placeholder">[ → ]</td></tr>
+        </tbody>
+      </table>
+      <p class="tbl-note">*Blended, assuming a mix weighted to organic. Pure-paid acquisition on premium keywords runs materially higher — see Section 03.</p>
+    </div>
+
+    <!-- P&L B -->
+    <div class="pnl-wrap rv">
+      <table class="pnl">
+        <caption>Worked example B — ₹1,50,000 premium laptop (electronics — the cap bites)</caption>
+        <thead>
+          <tr><th>Line</th><th>Affiliate (public)</th><th>Negotiated</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sale value</td><td>₹1,50,000</td><td>₹1,50,000</td></tr>
+          <tr><td>Headline rate</td><td>~1–5%<sup>6</sup></td><td class="placeholder">[ rate ]</td></tr>
+          <tr><td>CE commission cap</td><td>applies — caps the rupee payout<sup>7</sup></td><td>?</td></tr>
+          <tr class="grp"><td>Gross revenue / sale</td><td>~₹300–900 (capped)</td><td class="placeholder">[ fill ]</td></tr>
+          <tr><td>Less: acquisition cost*</td><td>~₹800–1,500</td><td>~₹800–1,500</td></tr>
+          <tr class="net"><td>Net margin / sale</td><td class="neg">often negative on paid</td><td class="placeholder">[ → ]</td></tr>
+        </tbody>
+      </table>
+      <p class="tbl-note">Electronics also carries a 24-hour referral cookie<sup>6</sup> — a short window to convert, which further pressures paid acquisition.</p>
+    </div>
+
+    <div class="insight rv">
+      <span class="tag">An observation</span>
+      <p>The same ₹1 of sale tends to earn roughly <strong>3× more in a commission-friendly category than in electronics.</strong><sup>8</sup> This suggests the strategy may benefit from focusing less on simply "expensive products" and more on <strong>high-ticket items in categories that both carry an EMI offer and pay a workable commission</strong> — a distinction that tends to make the difference between a model that compounds and one that works hard to stay level.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <span class="sec-num rv">03 — The digital strategy</span>
+    <h2 class="rv">Build the engine the economics can afford.</h2>
+    <p class="lead rv">The economics above point to a clear orientation: <strong>this is an organic-led business rather than a paid-led one.</strong> Broad paid advertising on premium keywords will tend to outrun the commission earned. The more durable model concentrates effort on owned, low-cost-to-acquire channels, and uses paid media selectively — only where the math closes.</p>
+
+    <h3 class="rv">How modern digital marketing works — the frame</h3>
+    <p class="rv">Effective digital marketing is not a set of disconnected tactics; it is the deliberate management of a buyer's journey across five stages, with the right medium matched to each. A sound strategy moves a prospect along this funnel at the lowest viable cost per stage.</p>
+
+    <div class="funnel rv">
+      <div class="fstage">
+        <div class="fs-stage">Awareness</div>
+        <div class="fs-goal">Be seen by the right buyer</div>
+        <div class="fs-med">SEO content, YouTube, social, display</div>
+      </div>
+      <div class="fstage">
+        <div class="fs-stage">Consideration</div>
+        <div class="fs-goal">Become a trusted option</div>
+        <div class="fs-med">Comparison guides, reviews, video explainers</div>
+      </div>
+      <div class="fstage">
+        <div class="fs-stage">Intent</div>
+        <div class="fs-goal">Capture the ready-to-buy</div>
+        <div class="fs-med">Search ads, retargeting, high-intent keywords</div>
+      </div>
+      <div class="fstage">
+        <div class="fs-stage">Conversion</div>
+        <div class="fs-goal">Remove friction to purchase</div>
+        <div class="fs-med">Landing-page UX, clean sign-on, clear offer</div>
+      </div>
+      <div class="fstage">
+        <div class="fs-stage">Advocacy</div>
+        <div class="fs-goal">Turn buyers into a channel</div>
+        <div class="fs-med">Referral programme, email, community</div>
+      </div>
+    </div>
+    <p class="rv">Each medium has a distinct job and a distinct cost profile. <strong>SEO and content</strong> are slow to build but compound and cost little per visitor over time. <strong>Paid search and social</strong> are immediate but rented — the moment spend stops, so does the traffic. <strong>Video</strong> builds trust for considered purchases. <strong>Referral and email</strong> are the cheapest channels of all, because they monetise an audience already won. The discipline lies in weighting the mix to the economics of the specific business — which, for a card-linked EMI model, points firmly toward the owned end of the spectrum.</p>
+
+    <h3 class="rv">Who the strategy targets</h3>
+    <p class="rv">Not the general online shopper, but the high-value buyer who is <em>already</em> EMI-inclined: urban and metro, researching a considered purchase, comparing offers before committing. This buyer is searchable, reachable, and self-qualifying by intent — which is what keeps acquisition cost low.</p>
+
+    <h3 class="rv">The channel architecture</h3>
+
+    <div class="chan rv">
+      <div class="top"><span class="rank">1</span><span class="ttl">Search & content (SEO)</span><span class="role">Primary engine</span></div>
+      <p>Owning the high-intent queries — "best no-cost EMI on [product]," "[product] EMI offers compared" — yields traffic that is free, recurring, and pre-qualified. Given the commission ceiling, it is the channel whose economics work most reliably at scale. The content layer (comparisons, buying guides) compounds over time rather than resetting each month.</p>
+    </div>
+
+    <div class="chan rv">
+      <div class="top"><span class="rank">2</span><span class="ttl">Referral virality</span><span class="role">Zero-CAC growth</span></div>
+      <p>The site already carries the "cardholders earn money" referral mechanic. Properly instrumented, this turns each satisfied user into a distribution channel at near-zero acquisition cost — among the most economics-friendly growth levers available to this model.</p>
+    </div>
+
+    <div class="chan rv">
+      <div class="top"><span class="rank">3</span><span class="ttl">YouTube & long-form</span><span class="role">Trust + intent</span></div>
+      <p>Considered, high-ticket purchases are researched on video. Product walk-throughs and "is no-cost EMI really free?" explainers build trust and capture buyers at the decision moment — at a fraction of paid-search cost.</p>
+    </div>
+
+    <div class="chan rv">
+      <div class="top"><span class="rank">4</span><span class="ttl">Paid — surgical only</span><span class="role">Test & scale</span></div>
+      <p>Paid runs only on tightly-defined, high-margin product clusters where modelled net margin is positive — never as the default acquisition route. Budget is a scalpel, not a hose.</p>
+    </div>
+
+    <h3 class="rv">The build (CMS · SEO · SSO)</h3>
+    <p class="rv">A lightweight, SEO-first CMS, so content can be published and ranked without engineering effort on every change; sound technical SEO foundations (site structure, speed, schema markup) so the organic engine actually fires; and frictionless sign-on, so the referral loop and repeat visits are not lost to login drop-off. A detailed build specification would follow once the broad direction is settled.</p>
+
+    <div class="forward rv">
+      <span class="tag">On the horizon</span>
+      <p>In a later phase, much of this content engine can be operated by AI agents — drafting, scheduling and publishing across channels automatically — to compress cost and scale output well beyond a manually-run team. A separate conversation, once the base is in place.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <span class="sec-num rv">04 — Where to point it</span>
+    <h2 class="rv">Category &amp; product selection — the three-filter test.</h2>
+    <p class="rv">A product earns its place only by passing all three tests. This is what keeps the catalogue margin-led rather than merely "expensive-looking."</p>
+    <div class="filters rv">
+      <div class="filter"><div class="n">Filter 1</div><div class="t">EMI offer exists</div><div class="d">A no-cost / instant EMI is actually live on the platform for that item.</div></div>
+      <div class="filter"><div class="n">Filter 2</div><div class="t">Ticket high enough</div><div class="d">Large enough that EMI is meaningful — a ₹1,000 sale isn't worth the friction.</div></div>
+      <div class="filter"><div class="n">Filter 3</div><div class="t">Commission workable</div><div class="d">Sits in a category that pays enough to leave net margin after acquisition.</div></div>
+    </div>
+
+    <p class="rv" style="margin-top:24px">Mapped onto the existing categories, this points toward the high-ticket items that <em>also</em> pay well — while flagging electronics as high-traffic but margin-capped, to be handled with care.</p>
+
+    <div class="cat rv">
+      <div class="cat-head"><span class="name">Home &amp; Kitchen — large appliances</span><span class="tier">Best margin fit</span></div>
+      <ul class="prod">
+        <li><span class="pname">Refrigerators (side-by-side / French door)</span><span class="why">High ticket, EMI near-universal, commission-friendly category, steady search demand.</span></li>
+        <li><span class="pname">Washing machines (front-load)</span><span class="why">Considered purchase, strong "best EMI" search intent, healthy rate.</span></li>
+        <li><span class="pname">Air conditioners (split / inverter)</span><span class="why">Seasonal spikes, high EMI uptake, premium-buyer pull.</span></li>
+        <li><span class="pname">Dishwashers</span><span class="why">Rising premium category, low competition on content, good rate.</span></li>
+        <li><span class="pname">Built-in / chimney + hob sets</span><span class="why">High-value home upgrade, aspirational buyer, EMI-friendly.</span></li>
+        <li><span class="pname">Premium small appliances (robot vacuums, espresso machines)</span><span class="why">Aspirational, giftable, strong organic intent at workable rates.</span></li>
+      </ul>
+    </div>
+
+    <div class="cat rv">
+      <div class="cat-head"><span class="name">Furniture &amp; home upgrade</span><span class="tier">Best margin fit</span></div>
+      <ul class="prod">
+        <li><span class="pname">Mattresses (premium / orthopedic)</span><span class="why">High ticket, heavy EMI usage, brand-led search, attractive commission.</span></li>
+        <li><span class="pname">Sofas &amp; recliners</span><span class="why">Considered, high-value, strong "EMI furniture" intent.</span></li>
+        <li><span class="pname">Modular wardrobes / beds</span><span class="why">High order value, financed by default, content-rich.</span></li>
+      </ul>
+    </div>
+
+    <div class="cat rv">
+      <div class="cat-head"><span class="name">Health, Household &amp; Personal Care — premium</span><span class="tier">High-rate adjacency</span></div>
+      <ul class="prod">
+        <li><span class="pname">Massage chairs</span><span class="why">High ticket, almost always sold on EMI, low content competition.</span></li>
+        <li><span class="pname">Premium fitness equipment (treadmills, smart bikes)</span><span class="why">High value, EMI-led, aspirational buyer, strong rate.</span></li>
+        <li><span class="pname">High-end grooming / beauty devices</span><span class="why">Beauty/personal-care commissions are among the highest — margin-rich even at lower tickets.</span></li>
+      </ul>
+    </div>
+
+    <div class="cat rv">
+      <div class="cat-head"><span class="name">Computers &amp; Electronics</span><span class="tier">Traffic-rich · margin-capped</span></div>
+      <ul class="prod">
+        <li><span class="pname">Premium laptops, smartphones, large TVs</span><span class="why">Enormous EMI demand and search volume — <strong>but</strong> the lowest commission and a rupee cap. Use as <em>top-of-funnel traffic</em> to feed referral and higher-margin cross-sell; do not fund with broad paid spend.</span></li>
+      </ul>
+    </div>
+
+    <div class="insight rv">
+      <span class="tag">The selection logic</span>
+      <p>The catalogue and content would lead with appliances, furniture and premium personal-care — high ticket <em>and</em> high rate. Electronics would be allowed to pull traffic, monetised through the referral loop and adjacent recommendations rather than its own thin commission.</p>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <span class="sec-num rv">05 — Refining the figures</span>
+    <h2 class="rv">A few inputs would make these numbers exact.</h2>
+    <p class="rv">The framework is in place; the following details would convert the illustrative figures into precise ones, and help determine where the engine is best pointed first.</p>
+    <ol class="asks rv">
+      <li><strong>The actual revenue per sale.</strong> Whether it follows the public affiliate rate or a negotiated empanelled commercial — and what it pays, by category.</li>
+      <li><strong>The cap reality.</strong> On high-ticket electronics, the genuine realised earning after any applicable cap.</li>
+      <li><strong>Category latitude.</strong> The categories on which the strongest card-linked / EMI offers can be secured — which would guide where to concentrate first.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <div class="sources rv">
+      <h4>Sources</h4>
+      1. India e-commerce size &amp; forecast — ICICI Securities, 2026.<br>
+      2. Share of card-based retail transactions on EMI — RBI data, cited 2025.<br>
+      3. Online share of consumer-electronics sales — TraceData Research.<br>
+      4. Premiumisation &amp; financed-purchase trend — Euromonitor, Consumer Electronics in India 2025.<br>
+      5. Commission-friendly category affiliate rate (home / appliances band) — Amazon Associates rate guides, 2026.<br>
+      6. Electronics affiliate rate &amp; 24-hour cookie — Amazon Associates India rate guides, 2026.<br>
+      7. Consumer-electronics commission cap — Amazon Associates Central help documentation.<br>
+      8. ~3× effective-rate gap between top categories and electronics — affiliate rate analyses, 2026.<br>
+      <span style="display:block;margin-top:10px;color:var(--amber);font-weight:600">Figures marked [ ] are illustrative placeholders, to be replaced with confirmed numbers.</span>
+    </div>
+    <div class="sign rv">A first cut, for discussion.</div>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var els=document.querySelectorAll('.rv');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e,i){e.style.transitionDelay=Math.min(i%6*60,300)+'ms';io.observe(e);});
+  })();
+</script>
+
+</body>
+</html>
